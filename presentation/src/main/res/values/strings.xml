@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">GithubComponents</string>
+
+    <string name="error_unexpected">Something went wrong.</string>
+    <string name="error_rate_limit">Please try again later, error occurred due to low api rate limit</string>
+
+    <string name="search_repository_no_results_message">Sorry, no results for your query</string>
+    <string name="title_search">Search</string>
+    <string name="description_repository_avatar">Repository avatar image</string>
+
+</resources>
