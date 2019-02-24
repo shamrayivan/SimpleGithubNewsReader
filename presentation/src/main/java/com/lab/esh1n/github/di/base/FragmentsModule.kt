@@ -1,9 +1,8 @@
 package com.lab.esh1n.github.di.base
 
 
-import com.lab.esh1n.github.search.mvp.SearchRepositoryMVPFragment
-import com.lab.esh1n.github.search.mvvm.SearchRepositoryMVVMFragment
-import com.lab.esh1n.github.di.search.SearchRepositoryModule
+import com.lab.esh1n.github.di.events.EventsModule
+import com.lab.esh1n.github.events.mvvm.EventsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,9 +13,7 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface FragmentsModule {
 
-    @ContributesAndroidInjector(modules = [SearchRepositoryModule::class])
-    fun buildSearchMVVMFragment(): SearchRepositoryMVVMFragment
+    @ContributesAndroidInjector(modules = [EventsModule::class])
+    fun buildEventsFragment(): EventsFragment
 
-    @ContributesAndroidInjector(modules = [SearchRepositoryModule::class])
-    fun buildSearchMVPFragment(): SearchRepositoryMVPFragment
 }

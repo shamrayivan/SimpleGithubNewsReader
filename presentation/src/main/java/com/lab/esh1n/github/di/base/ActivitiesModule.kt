@@ -1,6 +1,6 @@
 package com.lab.esh1n.github.di.base
 
-import com.lab.esh1n.github.search.SearchRepositoryActivity
+import com.lab.esh1n.github.events.EventsActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,5 +10,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface ActivitiesModule {
     @ContributesAndroidInjector(modules = [FragmentsModule::class])
-    fun contributeHomeActivity(): SearchRepositoryActivity
+    fun contributeHomeActivity(): EventsActivity
 }

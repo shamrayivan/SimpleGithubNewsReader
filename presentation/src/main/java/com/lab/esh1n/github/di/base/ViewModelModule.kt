@@ -3,9 +3,9 @@ package com.lab.esh1n.github.di.base
 import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.lab.esh1n.github.search.mvvm.SearchRepositoryViewModel
 import com.lab.esh1n.github.di.ViewModelKey
-import com.lab.esh1n.github.di.search.SearchRepositoryModule
+import com.lab.esh1n.github.di.events.EventsModule
+import com.lab.esh1n.github.events.mvvm.EventsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -16,18 +16,18 @@ import javax.inject.Singleton
 /**
  * Created by esh1n on 3/9/18.
  */
-@Module(includes = [SearchRepositoryModule::class])
+@Module(includes = [EventsModule::class])
 abstract class ViewModelModule {
 
 
     @Binds
     @IntoMap
-    @ViewModelKey(SearchRepositoryViewModel::class)
-    abstract fun repositorySearchViewModel(repositoryViewModel: SearchRepositoryViewModel): ViewModel
+    @ViewModelKey(EventsViewModel::class)
+    abstract fun provideEventsViewModel(repositoryViewModel: EventsViewModel): ViewModel
 
     @Singleton
     @Binds
-    abstract fun provideViewModelFractory(factory: ViewModelFactory): ViewModelProvider.Factory
+    abstract fun provideViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
 
     @Suppress("UNCHECKED_CAST")

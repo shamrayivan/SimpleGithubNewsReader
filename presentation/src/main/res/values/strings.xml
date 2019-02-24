@@ -7,5 +7,14 @@
     <string name="search_repository_no_results_message">Sorry, no results for your query</string>
     <string name="title_search">Search</string>
     <string name="description_repository_avatar">Repository avatar image</string>
+    <string name="text_no_events">No events yes</string>
+
+    <string name="error_server">Server side error</string>
+    <string name="error_access_denied">Access denied</string>
+    <string name="error_common">Something went wrong</string>
+    <string name="error_connection_state">Connection error</string>
+    <string name="error_http_unavailable">connections is unavailable</string>
+    <string name="error_not_found">Not found http error</string>
+    <string name="error_database">Database error</string>
 
 </resources>

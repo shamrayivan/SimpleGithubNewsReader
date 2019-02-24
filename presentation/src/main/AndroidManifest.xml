@@ -16,7 +16,7 @@
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
         <activity
-            android:name=".search.SearchRepositoryActivity"
+            android:name=".events.EventsActivity"
             android:label="@string/title_search">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

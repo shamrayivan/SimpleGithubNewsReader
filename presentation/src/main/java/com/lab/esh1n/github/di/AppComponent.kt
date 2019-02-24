@@ -2,10 +2,7 @@ package com.lab.esh1n.github.di
 
 import android.app.Application
 import com.lab.esh1n.github.GithubApp
-import com.lab.esh1n.github.di.base.ActivitiesModule
-import com.lab.esh1n.github.di.base.DatabaseModule
-import com.lab.esh1n.github.di.base.NetworkModule
-import com.lab.esh1n.github.di.base.ViewModelModule
+import com.lab.esh1n.github.di.base.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -17,6 +14,7 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     AndroidInjectionModule::class,
+    AppModule::class,
     NetworkModule::class,
     DatabaseModule::class,
     ActivitiesModule::class,

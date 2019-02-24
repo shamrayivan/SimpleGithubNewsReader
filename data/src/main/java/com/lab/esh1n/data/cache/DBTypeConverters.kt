@@ -29,6 +29,5 @@ class DBTypeConverters {
     @TypeConverter
     fun dateToString(date: Date?): String? {
         return if (date == null) null else API_DATE_FORMAT.format(date)
-
     }
 }

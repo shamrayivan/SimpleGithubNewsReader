@@ -1,11 +1,8 @@
 package com.lab.esh1n.data.api
 
-import com.lab.esh1n.data.api.response.RepositoryResponse
-import com.lab.esh1n.data.api.response.SearchResponse
-import io.reactivex.Observable
-import retrofit2.Response
+import com.lab.esh1n.data.api.response.EventResponse
+import io.reactivex.Single
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 /**
  * Created by esh1n on 3/7/18.
@@ -13,8 +10,7 @@ import retrofit2.http.Query
 
 interface APIService {
 
-    @GET("/search/repositories")
-    fun searchRepositories(@Query("q") query: String,
-                           @Query("page") page: Int): Observable<Response<SearchResponse<RepositoryResponse>>>
+    @GET("/events")
+    fun getEvents(): Single<List<EventResponse>>
 
 }

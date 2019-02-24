@@ -9,7 +9,7 @@
         android:id="@+id/fragment_search_repo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.lab.esh1n.github.search.mvvm.SearchRepositoryMVVMFragment"
+        android:name="com.lab.esh1n.github.events.mvvm.EventsFragment"
         />
 
 </FrameLayout>
