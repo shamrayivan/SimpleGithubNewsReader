@@ -14,7 +14,7 @@ import io.reactivex.Flowable
 @Dao
 interface EventsDAO {
 
-    @Query("SELECT * FROM " + EventsTableContract.TABLE_NAME)
+    @Query("SELECT * FROM events ORDER BY created_at DESC")
     fun getEvents(): Flowable<List<EventEntity>>
 
     @Query("DELETE FROM " + EventsTableContract.TABLE_NAME)

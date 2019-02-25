@@ -17,8 +17,14 @@ class FetchAndSaveEventsUseCase(private val api: APIService, private val eventsD
     override fun execute(argument: Unit): Single<Resource<Unit>> {
         return api
                 .getEvents()
-                .map { eventResponseMapper.map(it) }
-                .flatMapCompletable { events -> Completable.fromAction { eventsDAO.saveEvents(events) } }
+                .map {
+                    eventResponseMapper.map(it)
+                }
+                .flatMapCompletable { events ->
+                    Completable.fromAction {
+                        eventsDAO.saveEvents(events)
+                    }
+                }
                 .andThen(Single.just(Resource.success()))
                 .onErrorReturn { error -> Resource.error(errorsHandler.handle(error)) }
 
