@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.di.ViewModelKey
 import com.lab.esh1n.github.di.events.EventsModule
-import com.lab.esh1n.github.events.mvvm.EventsViewModel
+import com.lab.esh1n.github.events.EventsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

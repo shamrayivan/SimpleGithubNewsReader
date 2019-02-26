@@ -25,7 +25,8 @@ class FetchAndSaveEventsUseCase(private val api: APIService, private val eventsD
                         eventsDAO.saveEvents(events)
                     }
                 }
-                .andThen(Single.just(Resource.success()))
+                .andThen(
+                        Single.just(Resource.success()))
                 .onErrorReturn { error -> Resource.error(errorsHandler.handle(error)) }
 
 

@@ -2,7 +2,7 @@ package com.lab.esh1n.github.di.base
 
 
 import com.lab.esh1n.github.di.events.EventsModule
-import com.lab.esh1n.github.events.mvvm.EventsFragment
+import com.lab.esh1n.github.events.EventsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

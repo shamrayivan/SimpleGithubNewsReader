@@ -16,5 +16,6 @@
     <string name="error_http_unavailable">connections is unavailable</string>
     <string name="error_not_found">Not found http error</string>
     <string name="error_database">Database error</string>
+    <string name="text_events_updated_successfully">Events is up to date</string>
 
 </resources>

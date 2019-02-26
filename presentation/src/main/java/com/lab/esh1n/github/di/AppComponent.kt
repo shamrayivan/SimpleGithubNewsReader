@@ -22,6 +22,8 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(app: GithubApp)
 
+    fun plusWorkerComponent(): WorkerComponent.Builder
+
     @Component.Builder
     interface Builder {
         @BindsInstance

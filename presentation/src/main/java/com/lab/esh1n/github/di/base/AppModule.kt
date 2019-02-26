@@ -2,6 +2,7 @@ package com.lab.esh1n.github.di.base
 
 import android.app.Application
 import android.content.Context
+import androidx.work.WorkManager
 import com.lab.esh1n.github.base.ErrorDescriptionProviderImpl
 import com.lab.esh1n.github.domain.base.ErrorDescriptionProvider
 import com.lab.esh1n.github.domain.base.ErrorsHandler
@@ -32,5 +33,9 @@ class AppModule {
         return ErrorsHandler(errorDescriptionProvider)
     }
 
-
+    @Provides
+    @Singleton
+    fun provideWorkManager(): WorkManager {
+        return WorkManager.getInstance()
+    }
 }

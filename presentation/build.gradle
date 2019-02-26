@@ -69,6 +69,11 @@ dependencies {
     implementation "com.google.dagger:dagger-android:${rootProject.ext.dagger}"
     implementation "com.google.dagger:dagger-android-support:${rootProject.ext.dagger}"
 
+    // Kotlin + coroutines
+    implementation "android.arch.work:work-runtime-ktx:$workManager"
+    // optional - RxJava2 support
+    implementation "android.arch.work:work-rxjava2:$workManager"
+
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
     implementation "com.squareup.retrofit2:adapter-rxjava2:${rootProject.ext.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"

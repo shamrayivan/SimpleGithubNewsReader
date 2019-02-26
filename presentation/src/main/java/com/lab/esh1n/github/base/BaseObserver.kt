@@ -19,6 +19,9 @@ abstract class BaseObserver<T> : Observer<Resource<T>> {
                     onProgress(false)
                     onError(r.errorModel)
                 }
+                r.status == Resource.Status.ENDED -> {
+                    onProgress(false)
+                }
                 else -> {
                     onEmptyResourceEmission()
                 }
