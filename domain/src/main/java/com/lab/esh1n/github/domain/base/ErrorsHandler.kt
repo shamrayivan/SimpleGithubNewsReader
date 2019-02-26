@@ -1,5 +1,7 @@
 package com.lab.esh1n.github.domain.base
 
+import com.lab.esh1n.data.api.RetrofitException
+
 
 class ErrorsHandler(private val errorDescriptionProvider: ErrorDescriptionProvider) {
 

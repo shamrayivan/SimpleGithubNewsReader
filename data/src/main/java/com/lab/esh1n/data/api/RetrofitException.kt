@@ -1,4 +1,4 @@
-package com.lab.esh1n.github.domain.base
+package com.lab.esh1n.data.api
 
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -65,16 +65,19 @@ class RetrofitException internal constructor(message: String,
 
     companion object {
 
+        @JvmStatic
         fun httpError(url: String, response: Response<*>, retrofit: Retrofit): RetrofitException {
             val message = response.code().toString() + " " + response.message()
             return RetrofitException(message, url, response, Kind.HTTP, null, retrofit)
         }
 
+        @JvmStatic
         fun networkError(exception: IOException): RetrofitException {
             return RetrofitException(exception.message
                     ?: "", null, null, Kind.NETWORK, exception, null)
         }
 
+        @JvmStatic
         fun unexpectedError(exception: Throwable): RetrofitException {
             return RetrofitException(exception.message
                     ?: "", null, null, Kind.UNEXPECTED, exception, null)

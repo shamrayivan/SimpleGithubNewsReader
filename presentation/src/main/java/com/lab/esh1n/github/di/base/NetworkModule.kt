@@ -1,13 +1,13 @@
 package com.lab.esh1n.github.di.base
 
 import com.lab.esh1n.data.api.APIService
+import com.lab.esh1n.data.api.RxErrorHandlingCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
@@ -44,7 +44,7 @@ class NetworkModule {
                 .baseUrl(URL)
                 .client(client)
                 .addConverterFactory(converterFactory)
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addCallAdapterFactory(RxErrorHandlingCallAdapterFactory.create())
                 .build()
                 .create(APIService::class.java)
 
