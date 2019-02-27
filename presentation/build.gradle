@@ -51,6 +51,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycleComponent}"
 
+    implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.contraintLayout}"
+    implementation "androidx.constraintlayout:constraintlayout-solver:${rootProject.ext.contraintLayout}"
+
     implementation "com.github.bumptech.glide:glide:${rootProject.ext.glide}"
     kapt "com.github.bumptech.glide:compiler:${rootProject.ext.glide}"
 

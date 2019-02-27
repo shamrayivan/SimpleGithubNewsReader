@@ -4,6 +4,8 @@ ext {
     androidxComponent = "1.0.0"
     material = "1.1.0-alpha02"
 
+    contraintLayout="1.1.2"
+
     room = "2.1.0-alpha04"
     lifecycleComponent = "2.0.0"
 

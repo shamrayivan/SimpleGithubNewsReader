@@ -1,5 +1,5 @@
 <resources>
-    <dimen name="image_size_repository_avatar">32dp</dimen>
+    <dimen name="image_size_actor_avatar">40dp</dimen>
 
     <dimen name="card_corner_radius">5dp</dimen>
     <dimen name="card_elevation">3dp</dimen>
@@ -11,6 +11,7 @@
     <dimen name="margin_small">8dp</dimen>
 
     <dimen name="font_size_medium">16sp</dimen>
+    <dimen name="font_size_big">18sp</dimen>
     <dimen name="font_size_small">12sp</dimen>
 
     <dimen name="icon_size_small">16dp</dimen>

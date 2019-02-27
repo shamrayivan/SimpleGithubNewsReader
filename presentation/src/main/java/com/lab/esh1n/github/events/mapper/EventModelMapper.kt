@@ -12,10 +12,14 @@ class EventModelMapper : Mapper<EventEntity, EventModel>() {
         return EventModel(
                 id = source.id,
                 type = source.type,
-                repositoryName = source.repositoryName,
+                repositoryName = extractRepoName(source.repositoryName),
                 actorName = source.actorName,
                 actorAvatar = source.actorAvatar ?: "",
                 createdDate = dateMapper.mapInverse(source.createdDate)
         )
+    }
+
+    private fun extractRepoName(repoPath: String): String {
+        return repoPath.substring(repoPath.lastIndexOf('/') + 1)
     }
 }
