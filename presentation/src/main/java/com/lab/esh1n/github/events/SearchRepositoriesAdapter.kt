@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.databinding.ItemEventBinding
 import com.lab.esh1n.github.utils.inflate
+import com.lab.esh1n.github.utils.loadCircleImage
 
 /**
  * Created by esh1n on 3/18/18.
@@ -43,17 +44,11 @@ class EventsAdapter(private val clickHandler: (EventModel) -> Unit) :
             clickHandler.invoke(userModel)
         }
 
-        fun populate(person: EventModel?) {
-            if (person != null && binding != null) {
-                binding.event = person
+        fun populate(eventModel: EventModel?) {
+            if (eventModel != null && binding != null) {
+                binding.event = eventModel
                 binding.executePendingBindings()
-//                GlideApp.with(binding.itemImage)
-//                        .load(person.photoUrl)
-//                        .placeholder(R.drawable.ic_bike)
-//                        .fallback(R.drawable.ic_bike)
-//                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-//                        .skipMemoryCache(true)
-//                        .into(binding.itemImage);
+                binding.ivAvatar.loadCircleImage(eventModel.actorAvatar)
             }
         }
     }
