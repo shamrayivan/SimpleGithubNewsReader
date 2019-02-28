@@ -1,8 +1,9 @@
-package com.lab.esh1n.github.events
+package com.lab.esh1n.github.events.fragment
 
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lab.esh1n.github.R
 
@@ -10,7 +11,12 @@ import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
 import com.lab.esh1n.github.databinding.FragmentEventsBinding
 import com.lab.esh1n.github.domain.base.ErrorModel
+import com.lab.esh1n.github.events.EventModel
+import com.lab.esh1n.github.events.EventsAdapter
+import com.lab.esh1n.github.events.viewmodel.EventsViewModel
+import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
+import com.lab.esh1n.github.utils.addFragmentToStack
 import com.lab.esh1n.github.utils.setVisibleOrGone
 
 /**
@@ -25,6 +31,8 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
     private var binding: FragmentEventsBinding? = null
 
     private lateinit var adapter: EventsAdapter
+
+    private lateinit var sharedEventViewModel: SharedEventViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,11 +54,13 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
     }
 
     private fun onEventClick(eventModel: EventModel) {
-        //activity.addFragmentToStack(ProfileByIdFragment.newInstance(userModel.id))
+        sharedEventViewModel.eventId.postValue(eventModel.id)
+        activity.addFragmentToStack(EventDetailFragment.newInstance())
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        sharedEventViewModel = ViewModelProviders.of(requireActivity()).get(SharedEventViewModel::class.java)
         observeEvents()
         viewModel.loadEvents()
     }
@@ -123,6 +133,11 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
                 it.loadingIndicator.setVisibleOrGone(false)
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        sharedEventViewModel.eventId.value = -1
     }
 
     companion object {

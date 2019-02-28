@@ -17,6 +17,9 @@ interface EventsDAO {
     @Query("SELECT * FROM events ORDER BY created_at DESC")
     fun getEvents(): Flowable<List<EventEntity>>
 
+    @Query("SELECT DISTINCT * FROM events WHERE id =:id")
+    fun getEventById(id: Long): Flowable<EventEntity>
+
     @Query("DELETE FROM " + EventsTableContract.TABLE_NAME)
     fun clear()
 

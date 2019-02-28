@@ -7,6 +7,7 @@ package com.lab.esh1n.github.events
 data class EventModel(val id: Long,
                       val type: String,
                       val repositoryName: String,
+                      val repositoryLink: String,
                       val actorAvatar: String,
                       val actorName: String?,
                       val createdDate: String)

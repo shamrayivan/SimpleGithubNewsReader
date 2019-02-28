@@ -2,7 +2,8 @@ package com.lab.esh1n.github.di.base
 
 
 import com.lab.esh1n.github.di.events.EventsModule
-import com.lab.esh1n.github.events.EventsFragment
+import com.lab.esh1n.github.events.fragment.EventDetailFragment
+import com.lab.esh1n.github.events.fragment.EventsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -15,5 +16,8 @@ interface FragmentsModule {
 
     @ContributesAndroidInjector(modules = [EventsModule::class])
     fun buildEventsFragment(): EventsFragment
+
+    @ContributesAndroidInjector(modules = [EventsModule::class])
+    fun buildEventDetailFragment(): EventDetailFragment
 
 }

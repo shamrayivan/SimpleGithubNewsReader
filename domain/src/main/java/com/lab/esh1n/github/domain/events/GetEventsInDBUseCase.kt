@@ -7,7 +7,7 @@ import com.lab.esh1n.github.domain.base.ErrorsHandler
 import com.lab.esh1n.github.domain.base.Resource
 import io.reactivex.Flowable
 
-class EventsInDBUseCase(private val eventsDAO: EventsDAO, private val errorsHandler: ErrorsHandler)
+class GetEventsInDBUseCase(private val eventsDAO: EventsDAO, private val errorsHandler: ErrorsHandler)
     : UseCase<Any, Flowable<Resource<List<EventEntity>>>> {
     override fun execute(argument: Any): Flowable<Resource<List<EventEntity>>> {
         return eventsDAO.getEvents()

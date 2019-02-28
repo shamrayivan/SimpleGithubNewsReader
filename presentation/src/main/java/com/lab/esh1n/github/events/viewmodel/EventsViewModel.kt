@@ -1,11 +1,12 @@
-package com.lab.esh1n.github.events
+package com.lab.esh1n.github.events.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.work.WorkManager
 import com.lab.esh1n.github.base.BaseViewModel
 import com.lab.esh1n.github.domain.base.Resource
-import com.lab.esh1n.github.domain.events.EventsInDBUseCase
 import com.lab.esh1n.github.domain.events.FetchAndSaveEventsUseCase
+import com.lab.esh1n.github.domain.events.GetEventsInDBUseCase
+import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
 import com.lab.esh1n.github.utils.applyAndroidSchedulers
 import com.lab.esh1n.github.utils.startPeriodicSync
@@ -17,7 +18,7 @@ import javax.inject.Inject
 
 class EventsViewModel
 @Inject
-constructor(private val loadEventsUseCase: EventsInDBUseCase,
+constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
             private val fetchAndSaveEventsUseCase: FetchAndSaveEventsUseCase,
             private val workManager: WorkManager)
     : BaseViewModel() {

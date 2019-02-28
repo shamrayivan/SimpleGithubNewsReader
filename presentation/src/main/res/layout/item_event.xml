@@ -27,6 +27,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
+
                 android:id="@+id/ivAvatar"
                 android:layout_width="@dimen/image_size_actor_avatar"
                 android:layout_height="@dimen/image_size_actor_avatar"
@@ -50,10 +51,12 @@
                 android:layout_marginEnd="@dimen/margin_small"
                 android:drawableStart="@drawable/ic_user"
                 android:drawablePadding="@dimen/padding_small"
+                android:gravity="center_vertical"
                 android:text="@{event.actorName}"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/font_size_big"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/ivAvatar"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivAvatar"
                 app:layout_constraintTop_toTopOf="@+id/ivAvatar"
@@ -64,7 +67,8 @@
                 style="@style/EventTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="@dimen/margin_small"
                 android:gravity="center_vertical"
                 android:textColor="@color/font_color_black"
@@ -73,9 +77,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/tvRepository"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
-                app:layout_constraintTop_toTopOf="@+id/tvRepository"
-                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
                 tools:text="pushed to"/>
 
             <TextView
@@ -84,7 +87,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/padding_small"
+                android:layout_marginTop="8dp"
                 android:drawableStart="@drawable/ic_repo"
                 android:drawablePadding="@dimen/padding_small"
                 android:gravity="center_vertical"
@@ -94,7 +97,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/tvActorName"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/tvType"
-                app:layout_constraintTop_toBottomOf="@+id/tvActorName"
+                app:layout_constraintTop_toBottomOf="@+id/ivAvatar"
                 tools:text="Android Repo"/>
 
 
@@ -102,7 +105,6 @@
                 android:id="@+id/tvCreatedDate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_small"
                 android:layout_marginTop="@dimen/padding_small"
                 android:layout_marginBottom="@dimen/margin_small"
                 android:drawableStart="@drawable/ic_time"
@@ -113,7 +115,7 @@
                 android:textSize="@dimen/font_size_small"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/tvRepository"
-                app:layout_constraintStart_toEndOf="@+id/ivAvatar"
+                app:layout_constraintStart_toStartOf="@+id/tvType"
                 app:layout_constraintTop_toBottomOf="@+id/tvRepository"
                 tools:text="24 of november"/>
 

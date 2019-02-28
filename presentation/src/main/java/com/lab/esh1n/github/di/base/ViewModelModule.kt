@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.di.ViewModelKey
 import com.lab.esh1n.github.di.events.EventsModule
-import com.lab.esh1n.github.events.EventsViewModel
+import com.lab.esh1n.github.events.viewmodel.EventDetailViewModel
+import com.lab.esh1n.github.events.viewmodel.EventsViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -23,7 +24,12 @@ abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(EventsViewModel::class)
-    abstract fun provideEventsViewModel(repositoryViewModel: EventsViewModel): ViewModel
+    abstract fun provideEventsViewModel(eventsViewModel: EventsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(EventDetailViewModel::class)
+    abstract fun provideEventDetailViewModel(eventDetail: EventDetailViewModel): ViewModel
 
     @Singleton
     @Binds
