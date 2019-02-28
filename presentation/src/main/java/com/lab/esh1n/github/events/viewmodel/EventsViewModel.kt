@@ -8,6 +8,7 @@ import com.lab.esh1n.github.domain.events.FetchAndSaveEventsUseCase
 import com.lab.esh1n.github.domain.events.GetEventsInDBUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
+import com.lab.esh1n.github.utils.SingleLiveEvent
 import com.lab.esh1n.github.utils.applyAndroidSchedulers
 import com.lab.esh1n.github.utils.startPeriodicSync
 import javax.inject.Inject
@@ -24,7 +25,7 @@ constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
     : BaseViewModel() {
 
     val events = MutableLiveData<Resource<List<EventModel>>>()
-    val refreshOperation = MutableLiveData<Resource<Unit>>()
+    val refreshOperation = SingleLiveEvent<Resource<Unit>>()
     private val eventModelMapper = EventModelMapper()
 
     //TODO move this periodic sync to success login event
@@ -48,7 +49,9 @@ constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
                             refreshOperation.postValue(Resource.loading())
                         }
                         .applyAndroidSchedulers()
-                        .subscribe { result -> refreshOperation.postValue(result) })
+                        .subscribe { result ->
+                            refreshOperation.postValue(result)
+                        })
     }
 
 }

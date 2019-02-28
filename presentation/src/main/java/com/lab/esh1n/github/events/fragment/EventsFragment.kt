@@ -101,7 +101,9 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
         })
         viewModel.refreshOperation.observe(this, object : BaseObserver<Unit>() {
             override fun onData(data: Unit?) {
-                SnackbarBuilder.buildSnack(view!!, getString(R.string.text_events_updated_successfully)).show()
+                data?.let {
+                    SnackbarBuilder.buildSnack(view!!, getString(R.string.text_events_updated_successfully)).show()
+                }
             }
 
             override fun onError(error: ErrorModel?) {

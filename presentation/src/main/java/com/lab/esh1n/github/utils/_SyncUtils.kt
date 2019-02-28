@@ -16,6 +16,6 @@ fun WorkManager.startPeriodicSync() {
             .setConstraints(constraints)
             .build()
 
-    enqueueUniquePeriodicWork(SYNC_ID, ExistingPeriodicWorkPolicy.REPLACE, syncAllDataWorker);
+    enqueueUniquePeriodicWork(SYNC_ID, ExistingPeriodicWorkPolicy.KEEP, syncAllDataWorker);
 
 }
