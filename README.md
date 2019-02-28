@@ -1,12 +1,17 @@
 **About application**
 
 This application provides an ability to get latest GitHub events and shows the result in RecyclerView.
+
 Event contains info about actor, who invoked event,event type, updated repository, event date.
+
 As for portrait mode,after tap on specific event, it will be opened at new screen.
 As for landscape mode, after tap on specific event, it will be appear in own fragment right to events fragment.
+
 Events are synced by Workmanager with 5 minute interval. It's also possible to use pull-to-refresh feature.
+
 As for images, Glide was used.
 As for local storage, Room was used.
+
 **About feature releases**
 It's in plans to update app by fetching personalized events. So I am going to add user search screen to see user's feed.
 
