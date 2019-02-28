@@ -6,7 +6,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lab.esh1n.github.R
-
 import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
 import com.lab.esh1n.github.databinding.FragmentEventsBinding
@@ -35,6 +34,11 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
     private lateinit var sharedEventViewModel: SharedEventViewModel
 
 
+    private val isPortraitMode: Boolean
+            by lazy {
+                requireActivity().findViewById<View>(R.id.fragment_events) == null
+            }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.startPeriodicSync()
@@ -48,14 +52,19 @@ class EventsFragment : BaseVMFragment<EventsViewModel>() {
             it.recyclerview.layoutManager = LinearLayoutManager(requireActivity())
             it.recyclerview.setHasFixedSize(true)
             it.recyclerview.adapter = adapter
-            it.swipeRefreshLayout.setOnRefreshListener { viewModel.refresh() }
+            it.swipeRefreshLayout.setOnRefreshListener {
+                viewModel.refresh()
+            }
         }
 
     }
 
     private fun onEventClick(eventModel: EventModel) {
         sharedEventViewModel.eventId.postValue(eventModel.id)
-        activity.addFragmentToStack(EventDetailFragment.newInstance())
+        if (isPortraitMode) {
+            activity.addFragmentToStack(EventDetailFragment.newInstance())
+        }
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

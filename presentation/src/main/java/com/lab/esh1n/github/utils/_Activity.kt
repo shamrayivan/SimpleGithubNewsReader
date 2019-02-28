@@ -23,6 +23,15 @@ inline fun <reified T : Activity> Context?.startActivity(args: Bundle) {
     }
 }
 
+fun FragmentActivity?.addSingleFragmentToContainer(fragment: Fragment, hide: Boolean = false, tag: String? = fragment.tag) {
+    this?.let {
+        val fragmentNotExist = supportFragmentManager.findFragmentById(R.id.container_fragment) == null
+        if (fragmentNotExist) {
+            addFragment(fragment, hide, tag)
+        }
+    }
+}
+
 fun FragmentActivity?.addFragment(fragment: Fragment, hide: Boolean = false, tag: String? = fragment.tag) {
     this?.let {
         val transaction = supportFragmentManager.beginTransaction()

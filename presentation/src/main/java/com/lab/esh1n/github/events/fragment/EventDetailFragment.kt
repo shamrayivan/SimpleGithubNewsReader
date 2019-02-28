@@ -14,6 +14,9 @@ import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.viewmodel.EventDetailViewModel
 import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
+import com.lab.esh1n.github.utils.loadCircleImage
+import com.lab.esh1n.github.utils.openUrl
+import com.lab.esh1n.github.utils.setVisibleOrGone
 
 class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
     override val viewModelClass = EventDetailViewModel::class.java
@@ -24,8 +27,10 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
     override fun setupView(rootView: View) {
         super.setupView(rootView)
         binding = DataBindingUtil.bind(rootView)
-        binding?.tvLink?.setOnClickListener {
-            SnackbarBuilder.buildSnack(view!!, "Open browser").show()
+        binding?.let {
+            it.tvLink.setOnClickListener { _ ->
+                requireActivity().openUrl(it.event?.repositoryLink)
+            }
         }
     }
 
@@ -34,7 +39,10 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
         viewModel.event.observe(this, object : BaseObserver<EventModel>() {
             override fun onData(data: EventModel?) {
                 if (data != null) {
+                    showContent()
                     bindEventToView(data)
+                } else {
+                    showEmptyView()
                 }
             }
 
@@ -51,9 +59,25 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
         })
     }
 
+    private fun showEmptyView() {
+        binding?.let {
+            it.viewEmpty.setVisibleOrGone(true)
+            it.viewContent.setVisibleOrGone(false)
+        }
+
+    }
+
+    private fun showContent() {
+        binding?.let {
+            it.viewEmpty.setVisibleOrGone(false)
+            it.viewContent.setVisibleOrGone(true)
+        }
+    }
+
     private fun bindEventToView(eventModel: EventModel) {
         binding?.let {
             it.event = eventModel
+            it.ivAvatar.loadCircleImage(eventModel.actorAvatar)
             it.executePendingBindings()
         }
     }
