@@ -4,11 +4,11 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.lab.esh1n.github"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,10 +42,11 @@ dependencies {
     implementation project(':data')
     implementation project(':domain')
 
+    implementation "com.google.android.material:material:${rootProject.ext.material}"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:${rootProject.ext.swipeRefresh}"
     implementation "androidx.appcompat:appcompat:${rootProject.ext.androidxCompat}"
-    implementation "com.google.android.material:material:${rootProject.ext.androidxComponent}"
-    implementation "androidx.cardview:cardview:${rootProject.ext.androidxComponent}"
-    implementation "androidx.recyclerview:recyclerview:${rootProject.ext.androidxComponent}"
+    implementation "androidx.cardview:cardview:${rootProject.ext.cardView}"
+    implementation "androidx.recyclerview:recyclerview:${rootProject.ext.androidxCompat}"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-livedata:${rootProject.ext.lifecycleComponent}"
@@ -86,8 +87,8 @@ dependencies {
 
     testImplementation "junit:junit:${rootProject.ext.junit}"
 
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
