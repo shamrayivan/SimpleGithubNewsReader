@@ -1,4 +1,4 @@
-package com.lab.esh1n.github.di.base
+package com.lab.esh1n.github.di.beans
 
 import android.app.Application
 import android.content.Context

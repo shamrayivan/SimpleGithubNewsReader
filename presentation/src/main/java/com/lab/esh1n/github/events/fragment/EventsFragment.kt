@@ -12,7 +12,7 @@ import com.lab.esh1n.github.databinding.FragmentEventsBinding
 import com.lab.esh1n.github.domain.base.ErrorModel
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.EventsAdapter
-import com.lab.esh1n.github.events.viewmodel.EventsViewModel
+import com.lab.esh1n.github.events.viewmodel.EventsVM
 import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
 import com.lab.esh1n.github.utils.addFragmentToStack
@@ -22,8 +22,8 @@ import com.lab.esh1n.github.utils.setVisibleOrGone
  * Created by esh1n on 3/16/18.
  */
 
-class EventsFragment : BaseVMFragment<EventsViewModel>() {
-    override val viewModelClass = EventsViewModel::class.java
+class EventsFragment : BaseVMFragment<EventsVM>() {
+    override val viewModelClass = EventsVM::class.java
 
     override val layoutResource = R.layout.fragment_events
 

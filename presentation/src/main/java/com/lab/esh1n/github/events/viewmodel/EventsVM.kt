@@ -2,14 +2,16 @@ package com.lab.esh1n.github.events.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.work.WorkManager
+import com.lab.esh1n.github.base.BaseSchedulerProvider
 import com.lab.esh1n.github.base.BaseViewModel
+import com.lab.esh1n.github.base.applySchedulersFlowable
+import com.lab.esh1n.github.base.applySchedulersSingle
 import com.lab.esh1n.github.domain.base.Resource
 import com.lab.esh1n.github.domain.events.FetchAndSaveEventsUseCase
 import com.lab.esh1n.github.domain.events.GetEventsInDBUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
 import com.lab.esh1n.github.utils.SingleLiveEvent
-import com.lab.esh1n.github.utils.applyAndroidSchedulers
 import com.lab.esh1n.github.utils.startPeriodicSync
 import javax.inject.Inject
 
@@ -17,10 +19,11 @@ import javax.inject.Inject
  * Created by esh1n on 3/16/18.
  */
 
-class EventsViewModel
+class EventsVM
 @Inject
 constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
             private val fetchAndSaveEventsUseCase: FetchAndSaveEventsUseCase,
+            private val baseSchedulerProvider: BaseSchedulerProvider,
             private val workManager: WorkManager)
     : BaseViewModel() {
 
@@ -34,24 +37,24 @@ constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
     }
 
     fun loadEvents() {
-        events.postValue(Resource.loading())
-        addDisposable(
-                loadEventsUseCase.execute(Unit)
-                        .map { return@map Resource.map(it, eventModelMapper::map) }
-                        .applyAndroidSchedulers()
-                        .subscribe { models -> events.postValue(models) })
+        loadEventsUseCase.execute(Unit)
+                .doOnSubscribe { events.postValue(Resource.loading()) }
+                .map { return@map Resource.map(it, eventModelMapper::map) }
+                .compose(baseSchedulerProvider.applySchedulersFlowable())
+                .subscribe { models -> events.postValue(models) }
+                .disposeOnDestroy()
     }
 
     fun refresh() {
-        addDisposable(
-                fetchAndSaveEventsUseCase.execute(Unit)
-                        .doOnSubscribe { _ ->
-                            refreshOperation.postValue(Resource.loading())
-                        }
-                        .applyAndroidSchedulers()
-                        .subscribe { result ->
-                            refreshOperation.postValue(result)
-                        })
+        fetchAndSaveEventsUseCase.execute(Unit)
+                .doOnSubscribe { _ ->
+                    refreshOperation.postValue(Resource.loading())
+                }
+                .compose(baseSchedulerProvider.applySchedulersSingle())
+                .subscribe { result ->
+                    refreshOperation.postValue(result)
+                }
+                .disposeOnDestroy()
     }
 
 }
