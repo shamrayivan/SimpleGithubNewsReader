@@ -40,16 +40,7 @@ class EventsRepository(private val apiService: APIService, db: GithubDB) {
     }
 
     fun fetchAndSaveNewEvents(): Completable {
-        return apiService
-                .getFreshEvents("esh1n")
-                .map {
-                    eventResponseMapper.map(it)
-                }
-                .flatMapCompletable { events ->
-                    Completable.fromAction {
-                        eventDao.saveEvents(events)
-                    }
-                }
+        return fetchAndSaveEvents(START_PAGE)
     }
 
     companion object {
