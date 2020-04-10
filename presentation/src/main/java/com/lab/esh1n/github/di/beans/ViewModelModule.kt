@@ -4,7 +4,6 @@ import androidx.annotation.NonNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.di.ViewModelKey
-import com.lab.esh1n.github.di.events.EventsModule
 import com.lab.esh1n.github.events.viewmodel.EventDetailViewModel
 import com.lab.esh1n.github.events.viewmodel.EventsVM
 import dagger.Binds
@@ -17,7 +16,7 @@ import javax.inject.Singleton
 /**
  * Created by esh1n on 3/9/18.
  */
-@Module(includes = [EventsModule::class])
+@Module()
 abstract class ViewModelModule {
 
 

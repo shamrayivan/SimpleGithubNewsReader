@@ -6,7 +6,7 @@ import androidx.work.WorkerParameters
 import androidx.work.workDataOf
 import com.lab.esh1n.github.GithubApp
 import com.lab.esh1n.github.domain.base.Resource
-import com.lab.esh1n.github.domain.events.FetchAndSaveEventsUseCase
+import com.lab.esh1n.github.domain.events.usecase.FetchAndSaveEventsUseCase
 import com.lab.esh1n.github.utils.WORKER_ERROR_DESCRIPTION
 import javax.inject.Inject
 

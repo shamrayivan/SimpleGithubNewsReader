@@ -3,7 +3,7 @@ package com.lab.esh1n.github.events.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
@@ -69,14 +69,14 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        sharedEventViewModel = ViewModelProviders.of(requireActivity()).get(SharedEventViewModel::class.java)
+        sharedEventViewModel = ViewModelProvider(requireActivity()).get(SharedEventViewModel::class.java)
         observeEvents()
         viewModel.loadEvents()
     }
 
     private fun observeEvents() {
 
-        viewModel.events.observe(this, object : BaseObserver<List<EventModel>>() {
+        viewModel.events.observe(viewLifecycleOwner, object : BaseObserver<List<EventModel>>() {
             override fun onData(data: List<EventModel>?) {
 
                 val isEmpty = data?.isEmpty() ?: true
@@ -99,7 +99,7 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
                 showProgress(progress)
             }
         })
-        viewModel.refreshOperation.observe(this, object : BaseObserver<Unit>() {
+        viewModel.refreshOperation.observe(viewLifecycleOwner, object : BaseObserver<Unit>() {
             override fun onData(data: Unit?) {
                 data?.let {
                     SnackbarBuilder.buildSnack(view!!, getString(R.string.text_events_updated_successfully)).show()

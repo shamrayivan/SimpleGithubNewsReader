@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
@@ -36,7 +36,7 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.event.observe(this, object : BaseObserver<EventModel>() {
+        viewModel.event.observe(viewLifecycleOwner, object : BaseObserver<EventModel>() {
             override fun onData(data: EventModel?) {
                 if (data != null) {
                     showContent()
@@ -51,8 +51,8 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
             }
 
         })
-        sharedEventViewModel = ViewModelProviders.of(requireActivity()).get(SharedEventViewModel::class.java)
-        sharedEventViewModel.eventId.observe(this, Observer { eventId ->
+        sharedEventViewModel = ViewModelProvider(requireActivity()).get(SharedEventViewModel::class.java)
+        sharedEventViewModel.eventId.observe(viewLifecycleOwner, Observer { eventId ->
             if (eventId != null && eventId > 0) {
                 viewModel.loadEvent(eventId)
             }

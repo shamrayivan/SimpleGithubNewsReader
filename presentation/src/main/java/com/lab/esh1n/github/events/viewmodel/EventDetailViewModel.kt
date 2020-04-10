@@ -5,7 +5,7 @@ import com.lab.esh1n.github.base.BaseSchedulerProvider
 import com.lab.esh1n.github.base.BaseViewModel
 import com.lab.esh1n.github.base.applySchedulersFlowable
 import com.lab.esh1n.github.domain.base.Resource
-import com.lab.esh1n.github.domain.events.GetEventUseCase
+import com.lab.esh1n.github.domain.events.usecase.GetEventUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
 import javax.inject.Inject

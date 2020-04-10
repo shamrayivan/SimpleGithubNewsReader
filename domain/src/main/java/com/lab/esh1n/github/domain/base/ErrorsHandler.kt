@@ -15,7 +15,7 @@ class ErrorsHandler(private val errorDescriptionProvider: ErrorDescriptionProvid
 
     private fun convertToErrorModel(throwable: Throwable): ErrorModel {
 
-        var errorModel = ErrorModel.unexpectedError(throwable.localizedMessage)
+        var errorModel = ErrorModel.unexpectedError(throwable.localizedMessage ?: "")
 
         if (throwable is RetrofitException) {
             val response = throwable.response

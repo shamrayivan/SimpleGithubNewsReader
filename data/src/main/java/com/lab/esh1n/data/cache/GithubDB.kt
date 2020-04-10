@@ -13,7 +13,7 @@ import com.lab.esh1n.data.cache.entity.EventEntity
 @TypeConverters(DBTypeConverters::class)
 abstract class GithubDB : RoomDatabase() {
 
-    abstract fun repositoriesDAO(): EventsDAO
+    abstract fun eventsDAO(): EventsDAO
 
     companion object {
         const val NAME = "githubcomponents.db"

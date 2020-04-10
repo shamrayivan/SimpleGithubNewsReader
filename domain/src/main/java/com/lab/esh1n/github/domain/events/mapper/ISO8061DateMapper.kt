@@ -22,7 +22,7 @@ class ISO8061DateMapper : TwoWayMapper<String, Date>() {
         var s = iso8601string.replace("Z", "+00:00")
         return try {
             s = s.substring(0, 22) + s.substring(23)  // to get rid of the ":"
-            API_DATE_FORMAT.get()!!.parse(s)
+            API_DATE_FORMAT.get()!!.parse(s) ?: Date()
         } catch (e: Exception) {
             Date()
         }

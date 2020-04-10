@@ -66,12 +66,12 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJava}"
     implementation "io.reactivex.rxjava2:rxandroid:${rootProject.ext.rxAndroid}"
 
-    kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger}"
-
     implementation "com.google.dagger:dagger:${rootProject.ext.dagger}"
     implementation "com.google.dagger:dagger-android:${rootProject.ext.dagger}"
     implementation "com.google.dagger:dagger-android-support:${rootProject.ext.dagger}"
+
+    kapt "com.google.dagger:dagger-android-processor:${rootProject.ext.dagger}"
+    kapt "com.google.dagger:dagger-compiler:${rootProject.ext.dagger}"
 
     // Kotlin + coroutines
     implementation "android.arch.work:work-runtime-ktx:$workManager"

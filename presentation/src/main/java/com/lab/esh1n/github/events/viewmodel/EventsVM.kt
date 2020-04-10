@@ -7,8 +7,8 @@ import com.lab.esh1n.github.base.BaseViewModel
 import com.lab.esh1n.github.base.applySchedulersFlowable
 import com.lab.esh1n.github.base.applySchedulersSingle
 import com.lab.esh1n.github.domain.base.Resource
-import com.lab.esh1n.github.domain.events.FetchAndSaveEventsUseCase
-import com.lab.esh1n.github.domain.events.GetEventsInDBUseCase
+import com.lab.esh1n.github.domain.events.usecase.FetchAndSaveEventsUseCase
+import com.lab.esh1n.github.domain.events.usecase.GetEventsInDBUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
 import com.lab.esh1n.github.utils.SingleLiveEvent
