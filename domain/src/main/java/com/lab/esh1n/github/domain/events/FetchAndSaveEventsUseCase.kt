@@ -16,7 +16,7 @@ class FetchAndSaveEventsUseCase(private val api: APIService, private val eventsD
 
     override fun execute(argument: Unit): Single<Resource<Unit>> {
         return api
-                .getEvents()
+                .getEvents("esh1n")
                 .map {
                     eventResponseMapper.map(it)
                 }
