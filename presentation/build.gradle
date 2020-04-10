@@ -48,6 +48,9 @@ dependencies {
     implementation "androidx.cardview:cardview:${rootProject.ext.cardView}"
     implementation "androidx.recyclerview:recyclerview:${rootProject.ext.androidxCompat}"
 
+
+
+
     implementation "androidx.lifecycle:lifecycle-viewmodel:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-livedata:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycleComponent}"

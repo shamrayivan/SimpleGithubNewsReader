@@ -1,9 +1,12 @@
 package com.lab.esh1n.github.domain.events
 
+import androidx.paging.PagedList
+import androidx.paging.RxPagedListBuilder
 import com.lab.esh1n.data.api.APIService
 import com.lab.esh1n.data.cache.GithubDB
 import com.lab.esh1n.data.cache.entity.EventEntity
 import com.lab.esh1n.github.domain.events.mapper.EventResponseMapper
+import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
 import io.reactivex.Flowable
 
@@ -15,13 +18,17 @@ class EventsRepository(private val apiService: APIService, db: GithubDB) {
         return eventDao.getEventById(id)
     }
 
-    fun getEvents(): Flowable<List<EventEntity>> {
-        return eventDao.getEvents()
+    fun loadEvents(boundaryCallback: PagedList.BoundaryCallback<EventEntity>): Flowable<PagedList<EventEntity>> {
+
+        val dataSourceFactory = eventDao.getEvents()
+        return RxPagedListBuilder(dataSourceFactory, DATABASE_PAGE_SIZE)
+                .setBoundaryCallback(boundaryCallback)
+                .buildFlowable(BackpressureStrategy.BUFFER)
     }
 
-    fun refreshEvents(): Completable {
+    fun fetchAndSaveEvents(page: Int): Completable {
         return apiService
-                .getEvents("esh1n", 1)
+                .getEvents("esh1n", page)
                 .map {
                     eventResponseMapper.map(it)
                 }
@@ -30,6 +37,24 @@ class EventsRepository(private val apiService: APIService, db: GithubDB) {
                         eventDao.saveEvents(events)
                     }
                 }
+    }
+
+    fun fetchAndSaveNewEvents(): Completable {
+        return apiService
+                .getFreshEvents("esh1n")
+                .map {
+                    eventResponseMapper.map(it)
+                }
+                .flatMapCompletable { events ->
+                    Completable.fromAction {
+                        eventDao.saveEvents(events)
+                    }
+                }
+    }
+
+    companion object {
+        const val DATABASE_PAGE_SIZE = 30
+        const val START_PAGE = 1
     }
 
 }

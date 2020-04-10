@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.lab.esh1n.data.cache.entity.EventEntity
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
 import com.lab.esh1n.github.databinding.FragmentEventsBinding
 import com.lab.esh1n.github.domain.base.ErrorModel
-import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.EventsAdapter
 import com.lab.esh1n.github.events.viewmodel.EventsVM
 import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
@@ -48,7 +49,7 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
         super.setupView(rootView)
         binding = DataBindingUtil.bind(rootView)
         binding?.let {
-            adapter = EventsAdapter(this::onEventClick)
+            adapter = EventsAdapter(this::onEventClick, viewModel::eventModelMapper)
             it.recyclerview.layoutManager = LinearLayoutManager(requireActivity())
             it.recyclerview.setHasFixedSize(true)
             it.recyclerview.adapter = adapter
@@ -59,8 +60,8 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
 
     }
 
-    private fun onEventClick(eventModel: EventModel) {
-        sharedEventViewModel.eventId.postValue(eventModel.id)
+    private fun onEventClick(eventId: Long) {
+        sharedEventViewModel.eventId.postValue(eventId)
         if (isPortraitMode) {
             activity.addFragmentToStack(EventDetailFragment.newInstance())
         }
@@ -76,8 +77,8 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
 
     private fun observeEvents() {
 
-        viewModel.events.observe(viewLifecycleOwner, object : BaseObserver<List<EventModel>>() {
-            override fun onData(data: List<EventModel>?) {
+        viewModel.events.observe(viewLifecycleOwner, object : BaseObserver<PagedList<EventEntity>>() {
+            override fun onData(data: PagedList<EventEntity>?) {
 
                 val isEmpty = data?.isEmpty() ?: true
                 val emptyView = binding?.viewEmpty!!
@@ -85,9 +86,8 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
                 if (isEmpty) {
                     emptyView.text = getString(R.string.text_no_events)
                 }
-                adapter.swapEvents(data ?: emptyList())
-                (binding?.recyclerview?.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, 0)
-
+                adapter.submitList(data)
+                // (binding?.recyclerview?.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(0, 0)
             }
 
             override fun onError(error: ErrorModel?) {
@@ -113,6 +113,22 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
             override fun onProgress(progress: Boolean) {
                 super.onProgress(progress)
                 showProgress(progress)
+            }
+
+        })
+
+        viewModel.loadMoreOperation.observe(viewLifecycleOwner, object : BaseObserver<Unit>() {
+            override fun onData(data: Unit?) {
+
+            }
+
+            override fun onError(error: ErrorModel?) {
+                SnackbarBuilder.buildErrorSnack(requireView(), error?.message ?: "").show()
+            }
+
+            override fun onProgress(progress: Boolean) {
+                super.onProgress(progress)
+                // showProgress(progress)
             }
 
         })

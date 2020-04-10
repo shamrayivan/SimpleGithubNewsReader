@@ -1,5 +1,6 @@
 package com.lab.esh1n.data.cache.dao
 
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -15,7 +16,12 @@ import io.reactivex.Flowable
 interface EventsDAO {
 
     @Query("SELECT * FROM events ORDER BY created_at DESC")
-    fun getEvents(): Flowable<List<EventEntity>>
+    fun getEventsFlowable(): Flowable<List<EventEntity>>
+
+
+    @Query("SELECT * FROM events ORDER BY created_at DESC")
+    fun getEvents(): DataSource.Factory<Int, EventEntity>
+
 
     @Query("SELECT DISTINCT * FROM events WHERE id =:id")
     fun getEventById(id: Long): Flowable<EventEntity>

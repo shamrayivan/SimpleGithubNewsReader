@@ -26,6 +26,9 @@ dependencies {
     implementation "androidx.room:room-rxjava2:${rootProject.ext.room}"
     kapt "androidx.room:room-compiler:${rootProject.ext.room}"
 
+    api "androidx.paging:paging-runtime-ktx:${rootProject.ext.pagingVersion}"
+    api "androidx.paging:paging-rxjava2-ktx:${rootProject.ext.pagingVersion}"
+
     implementation "io.reactivex.rxjava2:rxjava:${rootProject.ext.rxJava}"
 
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofit}"
@@ -34,8 +37,8 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofit}"
 
     testImplementation "junit:junit:${rootProject.ext.junit}"
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation  "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }

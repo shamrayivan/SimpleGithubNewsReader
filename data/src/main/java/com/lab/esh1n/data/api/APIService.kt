@@ -15,4 +15,7 @@ interface APIService {
     @GET("/users/{username}/received_events")
     fun getEvents(@Path("username") userName: String, @Query("page") page: Int): Single<List<EventResponse>>
 
+    @GET("/users/{username}/received_events")
+    fun getFreshEvents(@Path("username") userName: String): Single<List<EventResponse>>
+
 }

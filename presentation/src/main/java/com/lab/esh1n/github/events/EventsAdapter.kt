@@ -3,32 +3,33 @@ package com.lab.esh1n.github.events
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.lab.esh1n.data.cache.entity.EventEntity
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.databinding.ItemEventBinding
 import com.lab.esh1n.github.utils.inflate
 import com.lab.esh1n.github.utils.loadCircleImage
+import kotlin.reflect.KProperty0
 
 /**
  * Created by esh1n on 3/18/18.
  */
 
-class EventsAdapter(private val clickHandler: (EventModel) -> Unit) :
-        RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
-
-    private var events: List<EventModel> = emptyList()
+class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper: KProperty0<(EventEntity) -> EventModel>) :
+        PagedListAdapter<EventEntity, EventsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.context.inflate(R.layout.item_event, parent))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val person = events[position]
-        holder.populate(person)
+        val eventEntity = getItem(position)
+        eventEntity?.let {
+            holder.populate(mapper.get()(it))
+        }
     }
-
-    override fun getItemCount() = events.size
 
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
@@ -40,8 +41,11 @@ class EventsAdapter(private val clickHandler: (EventModel) -> Unit) :
 
         override fun onClick(v: View) {
             val adapterPosition = adapterPosition
-            val userModel = events[adapterPosition]
-            clickHandler.invoke(userModel)
+            val event = getItem(adapterPosition)
+            event?.let {
+                clickHandler(it.id)
+            }
+
         }
 
         fun populate(eventModel: EventModel?) {
@@ -53,34 +57,16 @@ class EventsAdapter(private val clickHandler: (EventModel) -> Unit) :
         }
     }
 
-    fun swapEvents(newUsers: List<EventModel>) {
-        if (!this.events.isEmpty()) {
-            val result = DiffUtil.calculateDiff(DiffUtilCallback(this.events, newUsers))
-            this.events = newUsers
-            result.dispatchUpdatesTo(this)
-        } else {
-            this.events = newUsers
-            notifyDataSetChanged()
+    companion object {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<EventEntity> = object : DiffUtil.ItemCallback<EventEntity>() {
+            override fun areItemsTheSame(oldItem: EventEntity, newItem: EventEntity): Boolean {
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: EventEntity, newItem: EventEntity): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 
-    private class DiffUtilCallback(private val oldList: List<EventModel>,
-                                   private val newList: List<EventModel>) : DiffUtil.Callback() {
-
-        override fun getOldListSize(): Int {
-            return oldList.size
-        }
-
-        override fun getNewListSize(): Int {
-            return newList.size
-        }
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition].id == newList[newItemPosition].id
-        }
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
-            return oldList[oldItemPosition] == newList[newItemPosition]
-        }
-    }
 }
