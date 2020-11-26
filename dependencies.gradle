@@ -1,7 +1,23 @@
-ext {
+def sdk = [:]
+sdk.minVersion = 23
+sdk.targetVersion = 30
+sdk.compileVersion = 30
+ext.sdk = sdk
 
+def application = [:]
+application.versionMajor = 1
+application.versionMinor = 2
+application.versionPatch = 0
+application.versionCode = 3
+ext.application = application
+
+
+ext {
+    kotlin_version = '1.4.20'
     androidxCompat = "1.1.0"
     material = "1.2.1"
+    navigationVersion = '2.3.1'
+
     cardView = "1.0.0"
     swipeRefresh = "1.1.0"
 
@@ -15,7 +31,7 @@ ext {
 
     junit = "4.13"
 
-    retrofit = "2.8.1"
+    retrofit = "2.9.0"
     gson = "2.8.5"
     okhttp = "4.4.1"
 

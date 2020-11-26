@@ -1,6 +1,6 @@
 package com.lab.esh1n.github.di.beans
 
-import com.lab.esh1n.github.events.EventsActivity
+import com.lab.esh1n.github.MainActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,5 +10,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 interface ActivitiesModule {
     @ContributesAndroidInjector(modules = [FragmentsModule::class])
-    fun contributeHomeActivity(): EventsActivity
+    fun contributeHomeActivity(): MainActivity
 }

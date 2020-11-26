@@ -21,5 +21,7 @@
     <string name="text_please_tap_link_for_details">Please tap link below for details</string>
     <string name="text_event_placeholder">%s to</string>
     <string name="text_no_event_picked">Please pick event to see details.</string>
+    <string name="events">Events</string>
+    <string name="event_details">Event Details</string>
 
 </resources>

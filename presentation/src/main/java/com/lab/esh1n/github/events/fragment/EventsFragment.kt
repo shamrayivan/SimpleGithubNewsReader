@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lab.esh1n.data.cache.entity.EventEntity
@@ -16,7 +17,6 @@ import com.lab.esh1n.github.events.EventsAdapter
 import com.lab.esh1n.github.events.viewmodel.EventsVM
 import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
-import com.lab.esh1n.github.utils.addFragmentToStack
 import com.lab.esh1n.github.utils.setVisibleOrGone
 
 /**
@@ -34,11 +34,6 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
 
     private lateinit var sharedEventViewModel: SharedEventViewModel
 
-
-    private val isPortraitMode: Boolean
-            by lazy {
-                requireActivity().findViewById<View>(R.id.fragment_events) == null
-            }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +56,10 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
     }
 
     private fun onEventClick(eventId: Long) {
+        //TODO get rid of sharedviewmodel
         sharedEventViewModel.eventId.postValue(eventId)
-        if (isPortraitMode) {
-            activity.addFragmentToStack(EventDetailFragment.newInstance())
-        }
+        val directions = EventsFragmentDirections.navigateToEventDetail(eventId)
+        findNavController().navigate(directions)
 
     }
 

@@ -3,7 +3,6 @@ package com.lab.esh1n.github.events.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
@@ -52,7 +51,7 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
 
         })
         sharedEventViewModel = ViewModelProvider(requireActivity()).get(SharedEventViewModel::class.java)
-        sharedEventViewModel.eventId.observe(viewLifecycleOwner, Observer { eventId ->
+        sharedEventViewModel.eventId.observe(viewLifecycleOwner, { eventId ->
             if (eventId != null && eventId > 0) {
                 viewModel.loadEvent(eventId)
             }

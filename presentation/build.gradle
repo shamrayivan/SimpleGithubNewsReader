@@ -2,15 +2,16 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion sdk.compileVersion
     defaultConfig {
         applicationId "com.lab.esh1n.github"
-        minSdkVersion 23
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion sdk.minVersion
+        targetSdkVersion sdk.targetVersion
+        versionCode application.versionCode
+        versionName "${application.versionMajor}.${application.versionMinor}.${application.versionPatch}"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -28,6 +29,10 @@ android {
     compileOptions {
         targetCompatibility 1.8
         sourceCompatibility 1.8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 }
 
@@ -48,17 +53,19 @@ dependencies {
     implementation "androidx.cardview:cardview:${rootProject.ext.cardView}"
     implementation "androidx.recyclerview:recyclerview:${rootProject.ext.androidxCompat}"
 
-
-
-
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:${rootProject.ext.lifecycleComponent}"
     implementation "androidx.lifecycle:lifecycle-extensions:${rootProject.ext.lifecycleComponent}"
+    implementation "androidx.lifecycle:lifecycle-common-java8:${rootProject.ext.lifecycleComponent}"
 
     implementation "androidx.constraintlayout:constraintlayout:${rootProject.ext.contraintLayout}"
     implementation "androidx.constraintlayout:constraintlayout-solver:${rootProject.ext.contraintLayout}"
 
     implementation "com.github.bumptech.glide:glide:${rootProject.ext.glide}"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:${rootProject.ext.navigationVersion}"
+    implementation "androidx.navigation:navigation-ui-ktx:${rootProject.ext.navigationVersion}"
+
     kapt "com.github.bumptech.glide:compiler:${rootProject.ext.glide}"
 
     implementation "androidx.room:room-runtime:${rootProject.ext.room}"
