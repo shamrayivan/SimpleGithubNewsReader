@@ -1,27 +1,24 @@
 package com.lab.esh1n.github.events
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.lab.esh1n.data.cache.entity.EventEntity
 import com.lab.esh1n.github.R
-import com.lab.esh1n.github.databinding.ItemEventBinding
 import com.lab.esh1n.github.utils.inflate
 import com.lab.esh1n.github.utils.loadCircleImage
+import kotlinx.android.synthetic.main.item_photo.view.*
 import kotlin.reflect.KProperty0
 
-/**
- * Created by esh1n on 3/18/18.
- */
-
-class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper: KProperty0<(EventEntity) -> EventModel>) :
+class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper: KProperty0<(EventEntity) -> EventModel>,
+                    private val likeListener: (EventEntity) -> Unit) :
         PagedListAdapter<EventEntity, EventsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(parent.context.inflate(R.layout.item_event, parent))
+        return ViewHolder(parent.context.inflate(R.layout.item_photo, parent))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -33,10 +30,14 @@ class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper
 
     inner class ViewHolder internal constructor(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-        private val binding: ItemEventBinding? = DataBindingUtil.bind(itemView)
-
         init {
             view.setOnClickListener(this)
+            view.ivLike.setOnClickListener {
+                val event = getItem(adapterPosition)
+                event?.let {
+                    likeListener(it)
+                }
+            }
         }
 
         override fun onClick(v: View) {
@@ -49,10 +50,9 @@ class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper
         }
 
         fun populate(eventModel: EventModel?) {
-            if (eventModel != null && binding != null) {
-                binding.event = eventModel
-                binding.executePendingBindings()
-                binding.ivAvatar.loadCircleImage(eventModel.actorAvatar)
+            if (eventModel != null) {
+                itemView.ivLike.setImageResource(if (eventModel.isLiked) R.drawable.like_on else R.drawable.likeoff)
+                itemView.ivAvatar.loadCircleImage(eventModel.actorAvatar)
             }
         }
     }

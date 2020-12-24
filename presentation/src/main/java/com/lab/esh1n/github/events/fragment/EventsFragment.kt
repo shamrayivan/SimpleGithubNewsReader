@@ -44,7 +44,7 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
         super.setupView(rootView)
         binding = DataBindingUtil.bind(rootView)
         binding?.let {
-            adapter = EventsAdapter(this::onEventClick, viewModel::eventModelMapper)
+            adapter = EventsAdapter(this::onEventClick, viewModel::eventModelMapper,viewModel::onChangeLikeState)
             it.recyclerview.layoutManager = LinearLayoutManager(requireActivity())
             it.recyclerview.setHasFixedSize(true)
             it.recyclerview.adapter = adapter

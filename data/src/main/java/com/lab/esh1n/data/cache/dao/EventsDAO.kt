@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.lab.esh1n.data.cache.contract.EventsTableContract
 import com.lab.esh1n.data.cache.entity.EventEntity
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 /**
@@ -31,4 +32,7 @@ interface EventsDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveEvents(entities: List<EventEntity>)
+
+    @Query("UPDATE events SET `like`= :isLiked WHERE id =:id")
+    fun setLikeToEvent(id: Long, isLiked: Boolean): Completable
 }

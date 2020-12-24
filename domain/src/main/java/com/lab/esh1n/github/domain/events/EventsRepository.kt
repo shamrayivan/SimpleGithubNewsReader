@@ -39,6 +39,9 @@ class EventsRepository(private val apiService: APIService, db: GithubDB) {
                 }
     }
 
+    fun changeLikeStatus(eventEntity: EventEntity) =
+            eventDao.setLikeToEvent(eventEntity.id, !eventEntity.like)
+
     fun fetchAndSaveNewEvents(): Completable {
         return fetchAndSaveEvents(START_PAGE)
     }

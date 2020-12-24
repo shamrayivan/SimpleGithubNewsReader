@@ -10,4 +10,5 @@ data class EventModel(val id: Long,
                       val repositoryLink: String,
                       val actorAvatar: String,
                       val actorName: String?,
-                      val createdDate: String)
+                      val createdDate: String,
+                      val isLiked:Boolean)

@@ -9,7 +9,7 @@ import com.lab.esh1n.data.cache.entity.EventEntity
 /**
  * Created by esh1n on 3/7/18.
  */
-@Database(entities = [EventEntity::class], version = 1, exportSchema = false)
+@Database(entities = [EventEntity::class], version = 2, exportSchema = false)
 @TypeConverters(DBTypeConverters::class)
 abstract class GithubDB : RoomDatabase() {
 

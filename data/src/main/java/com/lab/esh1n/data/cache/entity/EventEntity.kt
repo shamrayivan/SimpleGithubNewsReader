@@ -24,6 +24,11 @@ data class EventEntity(
         @ColumnInfo(name = EventsTableContract.COLUMN_ACTOR_AVATAR)
         var actorAvatar: String? = null,
 
+        @ColumnInfo(name = "like")
+        var like: Boolean = false,
+
         @ColumnInfo(name = EventsTableContract.COLUMN_CREATED_DATE)
         var createdDate: Date
+
+
 )

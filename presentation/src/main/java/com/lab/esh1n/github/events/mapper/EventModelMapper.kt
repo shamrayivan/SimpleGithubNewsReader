@@ -17,7 +17,8 @@ class EventModelMapper : Mapper<EventEntity, EventModel>() {
                 actorName = source.actorName,
                 actorAvatar = source.actorAvatar ?: "",
                 repositoryLink = prepareRepositoryLink(source.repositoryName),
-                createdDate = dateMapper.mapInverse(source.createdDate)
+                createdDate = dateMapper.mapInverse(source.createdDate),
+                isLiked = source.like
         )
     }
 

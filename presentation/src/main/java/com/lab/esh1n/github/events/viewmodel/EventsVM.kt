@@ -12,6 +12,7 @@ import com.lab.esh1n.github.domain.base.Resource
 import com.lab.esh1n.github.domain.events.EventsRepository.Companion.START_PAGE
 import com.lab.esh1n.github.domain.events.usecase.FetchAndSaveEventsUseCase
 import com.lab.esh1n.github.domain.events.usecase.GetEventsInDBUseCase
+import com.lab.esh1n.github.domain.events.usecase.LikeEventUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
 import com.lab.esh1n.github.utils.SingleLiveEvent
@@ -25,6 +26,7 @@ class EventsVM
 @Inject
 constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
             private val fetchAndSaveEventsUseCase: FetchAndSaveEventsUseCase,
+            private val likeUseCase: LikeEventUseCase,
             private val baseSchedulerProvider: BaseSchedulerProvider,
             private val workManager: WorkManager)
     : BaseViewModel() {
@@ -45,7 +47,16 @@ constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
         loadEventsUseCase.execute(eventBoundaryCallback)
                 .doOnSubscribe { events.postValue(Resource.loading()) }
                 .compose(baseSchedulerProvider.applySchedulersFlowable())
-                .subscribe { models -> events.postValue(models) }
+                .subscribe { models ->
+                    events.postValue(models)
+                }
+                .disposeOnDestroy()
+    }
+
+    fun onChangeLikeState(eventEntity:EventEntity){
+        likeUseCase.execute(eventEntity)
+                .compose(baseSchedulerProvider.applySchedulersSingle())
+                .subscribe { result -> }
                 .disposeOnDestroy()
     }
 
