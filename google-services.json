@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "959919768942",
+    "project_id": "phototest-7b9ad",
+    "storage_bucket": "phototest-7b9ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959919768942:android:2a5c22db23989efc3c6d7f",
+        "android_client_info": {
+          "package_name": "com.lab.shamray.github"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959919768942-m820mkhdo0418qcti7q52gbf0kp3utbt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3fc8gHhZ9P0aqfbMZ1DAnXQfUxbkpcEI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959919768942-m820mkhdo0418qcti7q52gbf0kp3utbt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

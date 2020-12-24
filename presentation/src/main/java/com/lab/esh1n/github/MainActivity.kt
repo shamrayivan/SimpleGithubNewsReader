@@ -6,6 +6,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.lab.esh1n.github.base.BaseActivity
 import com.lab.esh1n.github.utils.appbarconfig.appBarConfig
 
@@ -15,10 +18,14 @@ import com.lab.esh1n.github.utils.appbarconfig.appBarConfig
 
 class MainActivity : BaseActivity() {
 
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     private val appBarConfiguration by appBarConfig(R.id.nav_host_fragment)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        firebaseAnalytics = Firebase.analytics
+        firebaseAnalytics.logEvent("AppStart",null)
         setContentView(R.layout.activity_main)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         val navHostFragment =
