@@ -1,13 +1,10 @@
 package com.lab.esh1n.github.events.fragment
 
 import android.os.Bundle
-import android.view.View
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
-import com.lab.esh1n.github.databinding.FragmentEventDetailsBinding
 import com.lab.esh1n.github.domain.base.ErrorModel
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.viewmodel.EventDetailViewModel
@@ -15,34 +12,24 @@ import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
 import com.lab.esh1n.github.utils.loadCircleImage
 import com.lab.esh1n.github.utils.openUrl
-import com.lab.esh1n.github.utils.setVisibleOrGone
+import kotlinx.android.synthetic.main.fragment_event_details.*
+import kotlinx.android.synthetic.main.item_photo.*
 
 class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
     override val viewModelClass = EventDetailViewModel::class.java
     override val layoutResource = R.layout.fragment_event_details
-    private var binding: FragmentEventDetailsBinding? = null
     private lateinit var sharedEventViewModel: SharedEventViewModel
-
-    override fun setupView(rootView: View) {
-        super.setupView(rootView)
-        binding = DataBindingUtil.bind(rootView)
-        binding?.let {
-            it.tvLink.setOnClickListener { _ ->
-                requireActivity().openUrl(it.event?.repositoryLink)
-            }
-        }
-    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        ivLike.setOnClickListener { viewModel.onChangeLikeState() }
         viewModel.event.observe(viewLifecycleOwner, object : BaseObserver<EventModel>() {
             override fun onData(data: EventModel?) {
-                if (data != null) {
-                    showContent()
-                    bindEventToView(data)
-                } else {
-                    showEmptyView()
+                btnOpenBrowser.setOnClickListener {
+                    requireActivity().openUrl(data?.actorAvatar)
                 }
+                ivAvatar.loadCircleImage(data?.actorAvatar)
+                ivLike.setImageResource(if (data?.isLiked == true) R.drawable.like_on else R.drawable.likeoff)
             }
 
             override fun onError(error: ErrorModel?) {
@@ -58,28 +45,6 @@ class EventDetailFragment : BaseVMFragment<EventDetailViewModel>() {
         })
     }
 
-    private fun showEmptyView() {
-        binding?.let {
-            it.viewEmpty.setVisibleOrGone(true)
-            it.viewContent.setVisibleOrGone(false)
-        }
-
-    }
-
-    private fun showContent() {
-        binding?.let {
-            it.viewEmpty.setVisibleOrGone(false)
-            it.viewContent.setVisibleOrGone(true)
-        }
-    }
-
-    private fun bindEventToView(eventModel: EventModel) {
-        binding?.let {
-            it.event = eventModel
-            it.ivAvatar.loadCircleImage(eventModel.actorAvatar)
-            it.executePendingBindings()
-        }
-    }
 
     companion object {
         fun newInstance() = EventDetailFragment()

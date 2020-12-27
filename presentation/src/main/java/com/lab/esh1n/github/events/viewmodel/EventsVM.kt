@@ -12,6 +12,7 @@ import com.lab.esh1n.github.domain.base.Resource
 import com.lab.esh1n.github.domain.events.EventsRepository.Companion.START_PAGE
 import com.lab.esh1n.github.domain.events.usecase.FetchAndSaveEventsUseCase
 import com.lab.esh1n.github.domain.events.usecase.GetEventsInDBUseCase
+import com.lab.esh1n.github.domain.events.usecase.LikeArgs
 import com.lab.esh1n.github.domain.events.usecase.LikeEventUseCase
 import com.lab.esh1n.github.events.EventModel
 import com.lab.esh1n.github.events.mapper.EventModelMapper
@@ -54,7 +55,7 @@ constructor(private val loadEventsUseCase: GetEventsInDBUseCase,
     }
 
     fun onChangeLikeState(eventEntity:EventEntity){
-        likeUseCase.execute(eventEntity)
+        likeUseCase.execute(LikeArgs(eventEntity.id,eventEntity.like))
                 .compose(baseSchedulerProvider.applySchedulersSingle())
                 .subscribe { result -> }
                 .disposeOnDestroy()

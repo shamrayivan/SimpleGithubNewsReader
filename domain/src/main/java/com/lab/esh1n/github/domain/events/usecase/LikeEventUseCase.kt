@@ -11,11 +11,13 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 class LikeEventUseCase @Inject constructor(private val eventRepo: EventsRepository, private val errorsHandler: ErrorsHandler)
-    : UseCase<EventEntity, Single<Resource<Unit>>> {
+    : UseCase<LikeArgs, Single<Resource<Unit>>> {
 
-    override fun execute(argument: EventEntity): Single<Resource<Unit>> {
+    override fun execute(argument: LikeArgs): Single<Resource<Unit>> {
         return eventRepo.changeLikeStatus(argument)
                 .andThen(Single.just(Resource.success()))
                 .onErrorReturn { error -> Resource.error(errorsHandler.handle(error)) }
     }
 }
+
+data class LikeArgs(val id:Long,val isLiked:Boolean)

@@ -12,23 +12,9 @@ data class EventEntity(
         @ColumnInfo(name = EventsTableContract.COLUMN_ID)
         var id: Long,
 
-        @ColumnInfo(name = EventsTableContract.COLUMN_TYPE)
-        var type: String,
-
-        @ColumnInfo(name = EventsTableContract.COLUMN_REPOSITORY_NAME)
-        var repositoryName: String,
-
-        @ColumnInfo(name = EventsTableContract.COLUMN_EVENT_ACTOR_NAME)
-        var actorName: String,
-
         @ColumnInfo(name = EventsTableContract.COLUMN_ACTOR_AVATAR)
         var actorAvatar: String? = null,
 
         @ColumnInfo(name = "like")
         var like: Boolean = false,
-
-        @ColumnInfo(name = EventsTableContract.COLUMN_CREATED_DATE)
-        var createdDate: Date
-
-
 )

@@ -16,11 +16,11 @@ import io.reactivex.Flowable
 @Dao
 interface EventsDAO {
 
-    @Query("SELECT * FROM events ORDER BY created_at DESC")
+    @Query("SELECT * FROM events ORDER BY id DESC")
     fun getEventsFlowable(): Flowable<List<EventEntity>>
 
 
-    @Query("SELECT * FROM events ORDER BY created_at DESC")
+    @Query("SELECT * FROM events ORDER BY id DESC")
     fun getEvents(): DataSource.Factory<Int, EventEntity>
 
 
@@ -30,7 +30,7 @@ interface EventsDAO {
     @Query("DELETE FROM " + EventsTableContract.TABLE_NAME)
     fun clear()
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun saveEvents(entities: List<EventEntity>)
 
     @Query("UPDATE events SET `like`= :isLiked WHERE id =:id")
