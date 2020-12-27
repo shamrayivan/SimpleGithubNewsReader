@@ -1,4 +1,4 @@
-package com.lab.esh1n.data.api;
+package com.shamray.lab.api;
 
 import java.io.IOException;
 import java.lang.annotation.Annotation;

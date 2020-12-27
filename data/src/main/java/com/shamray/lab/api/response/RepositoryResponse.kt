@@ -1,4 +1,4 @@
-package com.lab.esh1n.data.api.response
+package com.shamray.lab.api.response
 
 import com.google.gson.annotations.SerializedName
 

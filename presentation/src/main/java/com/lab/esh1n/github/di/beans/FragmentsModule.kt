@@ -2,7 +2,7 @@ package com.lab.esh1n.github.di.beans
 
 
 import com.lab.esh1n.github.events.fragment.EventDetailFragment
-import com.lab.esh1n.github.events.fragment.EventsFragment
+import com.lab.esh1n.github.events.fragment.PhotosFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -14,7 +14,7 @@ import dagger.android.ContributesAndroidInjector
 interface FragmentsModule {
 
     @ContributesAndroidInjector()
-    fun buildEventsFragment(): EventsFragment
+    fun buildEventsFragment(): PhotosFragment
 
     @ContributesAndroidInjector()
     fun buildEventDetailFragment(): EventDetailFragment

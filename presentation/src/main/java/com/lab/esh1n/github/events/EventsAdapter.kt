@@ -1,21 +1,20 @@
 package com.lab.esh1n.github.events
 
-import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.lab.esh1n.data.cache.entity.EventEntity
+import com.shamray.lab.cache.entity.PhotoEntity
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.utils.inflate
 import com.lab.esh1n.github.utils.loadCircleImage
 import kotlinx.android.synthetic.main.item_photo.view.*
 import kotlin.reflect.KProperty0
 
-class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper: KProperty0<(EventEntity) -> EventModel>,
-                    private val likeListener: (EventEntity) -> Unit) :
-        PagedListAdapter<EventEntity, EventsAdapter.ViewHolder>(DIFF_CALLBACK) {
+class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper: KProperty0<(PhotoEntity) -> EventModel>,
+                    private val likeListener: (PhotoEntity) -> Unit) :
+        PagedListAdapter<PhotoEntity, EventsAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(parent.context.inflate(R.layout.item_photo, parent))
@@ -58,12 +57,12 @@ class EventsAdapter(private val clickHandler: (Long) -> Unit, private val mapper
     }
 
     companion object {
-        val DIFF_CALLBACK: DiffUtil.ItemCallback<EventEntity> = object : DiffUtil.ItemCallback<EventEntity>() {
-            override fun areItemsTheSame(oldItem: EventEntity, newItem: EventEntity): Boolean {
+        val DIFF_CALLBACK: DiffUtil.ItemCallback<PhotoEntity> = object : DiffUtil.ItemCallback<PhotoEntity>() {
+            override fun areItemsTheSame(oldItem: PhotoEntity, newItem: PhotoEntity): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: EventEntity, newItem: EventEntity): Boolean {
+            override fun areContentsTheSame(oldItem: PhotoEntity, newItem: PhotoEntity): Boolean {
                 return oldItem == newItem
             }
         }

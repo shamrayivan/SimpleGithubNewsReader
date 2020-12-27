@@ -7,14 +7,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lab.esh1n.data.cache.entity.EventEntity
+import com.shamray.lab.cache.entity.PhotoEntity
 import com.lab.esh1n.github.R
 import com.lab.esh1n.github.base.BaseObserver
 import com.lab.esh1n.github.base.BaseVMFragment
 import com.lab.esh1n.github.databinding.FragmentEventsBinding
 import com.lab.esh1n.github.domain.base.ErrorModel
 import com.lab.esh1n.github.events.EventsAdapter
-import com.lab.esh1n.github.events.viewmodel.EventsVM
+import com.lab.esh1n.github.events.viewmodel.PhotosVM
 import com.lab.esh1n.github.events.viewmodel.SharedEventViewModel
 import com.lab.esh1n.github.utils.SnackbarBuilder
 import com.lab.esh1n.github.utils.setVisibleOrGone
@@ -23,8 +23,8 @@ import com.lab.esh1n.github.utils.setVisibleOrGone
  * Created by esh1n on 3/16/18.
  */
 
-class EventsFragment : BaseVMFragment<EventsVM>() {
-    override val viewModelClass = EventsVM::class.java
+class PhotosFragment : BaseVMFragment<PhotosVM>() {
+    override val viewModelClass = PhotosVM::class.java
 
     override val layoutResource = R.layout.fragment_events
 
@@ -58,7 +58,7 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
     private fun onEventClick(eventId: Long) {
         //TODO get rid of sharedviewmodel
         sharedEventViewModel.eventId.postValue(eventId)
-        val directions = EventsFragmentDirections.navigateToEventDetail(eventId)
+        val directions = PhotosFragmentDirections.navigateToEventDetail(eventId)
         findNavController().navigate(directions)
 
     }
@@ -72,8 +72,8 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
 
     private fun observeEvents() {
 
-        viewModel.events.observe(viewLifecycleOwner, object : BaseObserver<PagedList<EventEntity>>() {
-            override fun onData(data: PagedList<EventEntity>?) {
+        viewModel.events.observe(viewLifecycleOwner, object : BaseObserver<PagedList<PhotoEntity>>() {
+            override fun onData(data: PagedList<PhotoEntity>?) {
 
                 val isEmpty = data?.isEmpty() ?: true
                 val emptyView = binding?.viewEmpty!!
@@ -163,7 +163,7 @@ class EventsFragment : BaseVMFragment<EventsVM>() {
     }
 
     companion object {
-        fun newInstance() = EventsFragment()
+        fun newInstance() = PhotosFragment()
     }
 
 }

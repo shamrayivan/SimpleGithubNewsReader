@@ -1,4 +1,4 @@
-package com.lab.esh1n.data.api
+package com.shamray.lab.api
 
 import retrofit2.Response
 import retrofit2.Retrofit

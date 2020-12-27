@@ -1,4 +1,4 @@
-package com.lab.esh1n.data.cache
+package com.shamray.lab.cache
 
 import androidx.room.TypeConverter
 import java.util.*

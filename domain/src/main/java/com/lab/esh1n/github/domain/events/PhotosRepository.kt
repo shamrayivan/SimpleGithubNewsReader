@@ -2,23 +2,23 @@ package com.lab.esh1n.github.domain.events
 
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.lab.esh1n.data.api.APIService
-import com.lab.esh1n.data.cache.GithubDB
-import com.lab.esh1n.data.cache.entity.EventEntity
+import com.shamray.lab.api.APIService
+import com.shamray.lab.cache.GithubDB
+import com.shamray.lab.cache.entity.PhotoEntity
 import com.lab.esh1n.github.domain.events.usecase.LikeArgs
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import io.reactivex.Single
 
-class EventsRepository(private val apiService: APIService, db: GithubDB) {
+class PhotosRepository(private val apiService: APIService, db: GithubDB) {
 
     private val eventDao = db.eventsDAO();
-    fun getEventById(id: Long): Flowable<EventEntity> {
+    fun getEventById(id: Long): Flowable<PhotoEntity> {
         return eventDao.getEventById(id)
     }
 
-    fun loadEvents(boundaryCallback: PagedList.BoundaryCallback<EventEntity>): Flowable<PagedList<EventEntity>> {
+    fun loadEvents(boundaryCallback: PagedList.BoundaryCallback<PhotoEntity>): Flowable<PagedList<PhotoEntity>> {
 
         val dataSourceFactory = eventDao.getEvents()
         return RxPagedListBuilder(dataSourceFactory, PAGE_SIZE)
@@ -39,7 +39,7 @@ class EventsRepository(private val apiService: APIService, db: GithubDB) {
     private fun createPhotos(page: Int) =
             (0 until PAGE_SIZE).map { page * PAGE_SIZE + it }.map { id ->
                 val url = "https://picsum.photos/id/$id/800/"
-                EventEntity(id.toLong(), url)
+                PhotoEntity(id.toLong(), url)
             }
 
     fun changeLikeStatus(eventEntity: LikeArgs) =

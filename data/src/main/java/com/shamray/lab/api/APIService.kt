@@ -1,6 +1,6 @@
-package com.lab.esh1n.data.api
+package com.shamray.lab.api
 
-import com.lab.esh1n.data.api.response.EventResponse
+import com.shamray.lab.api.response.EventResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path

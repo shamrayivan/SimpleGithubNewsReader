@@ -1,7 +1,6 @@
 package com.lab.esh1n.github.events.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.lab.esh1n.data.cache.entity.EventEntity
 import com.lab.esh1n.github.base.BaseSchedulerProvider
 import com.lab.esh1n.github.base.BaseViewModel
 import com.lab.esh1n.github.base.applySchedulersFlowable

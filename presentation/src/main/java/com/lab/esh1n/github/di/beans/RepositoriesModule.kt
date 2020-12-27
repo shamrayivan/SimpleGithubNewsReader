@@ -1,8 +1,8 @@
 package com.lab.esh1n.github.di.beans
 
-import com.lab.esh1n.data.api.APIService
-import com.lab.esh1n.data.cache.GithubDB
-import com.lab.esh1n.github.domain.events.EventsRepository
+import com.shamray.lab.api.APIService
+import com.shamray.lab.cache.GithubDB
+import com.lab.esh1n.github.domain.events.PhotosRepository
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,8 +12,8 @@ class RepositoriesModule {
 
     @Provides
     @Singleton
-    fun providePlaceRepository(userSessionApiService: APIService, database: GithubDB): EventsRepository {
-        return EventsRepository(userSessionApiService, database)
+    fun providePlaceRepository(userSessionApiService: APIService, database: GithubDB): PhotosRepository {
+        return PhotosRepository(userSessionApiService, database)
     }
 
 }

@@ -1,4 +1,4 @@
-package com.lab.esh1n.data.cache.contract
+package com.shamray.lab.cache.contract
 
 /**
  * Created by esh1n on 3/9/18.

@@ -1,7 +1,7 @@
 package com.lab.esh1n.github.di.beans
 
-import com.lab.esh1n.data.api.APIService
-import com.lab.esh1n.data.api.RxErrorHandlingCallAdapterFactory
+import com.shamray.lab.api.APIService
+import com.shamray.lab.api.RxErrorHandlingCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient

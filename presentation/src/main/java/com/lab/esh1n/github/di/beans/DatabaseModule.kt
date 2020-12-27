@@ -2,7 +2,7 @@ package com.lab.esh1n.github.di.beans
 
 import android.app.Application
 import androidx.room.Room
-import com.lab.esh1n.data.cache.GithubDB
+import com.shamray.lab.cache.GithubDB
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

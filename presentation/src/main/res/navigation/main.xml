@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/event_list"
-        android:name="com.lab.esh1n.github.events.fragment.EventsFragment"
+        android:name="com.lab.esh1n.github.events.fragment.PhotosFragment"
         android:label="@string/events"
         tools:layout="@layout/fragment_events">
         <action
